@@ -2,151 +2,54 @@
 <html>
     <head>
         <title>Textacular</title>
+        <link rel="icon" href="/assets/TexttacularIcon(White).ico">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/styles.css">
-        <link rel="icon" href="/projects/Textacular/Textacular.ico">
-        <link rel="stylesheet" href="/projects/Textacular/Textacular.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Source+Code+Pro:wght@300;400;500;700;900&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500;800&family=Lora:wght@400;500;700&family=Open+Sans:wght@300;400;700&family=Roboto+Mono:wght@300;400;500;700&family=Roboto:wght@300;400;500;700;900&family=Share+Tech+Mono&family=Source+Code+Pro:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet"> 
         <style id="style"></style>
     </head>
-    <body class="light" onload="checkURL(); loadPreferences()">
+    <body onload="setUp()">
+        <script>"load"</script>
         <header>
-            <h1><i class=" fa fa-pencil-square"></i> Textacular <textarea id="file-name">Untitled.txt</textarea></h1> 
+            <div class="menu-bar">
+                <ul id="menu-bar--ul">
+                </ul>
+            </div>
         </header>
         <main>
-            <div class="topbar">
-                <ul class="topbar-list">
-                    <li>
-                        <div class="dropdown">
-                            <button>File <i class='fa fa-caret-down'></i></button>
-                            <div class="dropdown-content">
-                                <button class="tool" id="file-new-btn" onclick="newFile()"><i class="fa fa-file-text-o"></i> New</button>
-                                <button class="tool" id="file-open-btn" onclick="openFile()"><i class="fa fa-folder-open-o"></i> Open</button>
-                                <input type="file" id="file-upload" accept="text/plain, text/html" hidden/>
-                                <button class="tool" id="file-save-btn" onclick="saveFile()"><i class="fa fa-save"></i> Save</button>
-                                <button class="tool" id="file-saveas-btn" onclick="saveFileAs()"><i class="fa fa-save"></i> Save As...</button>
-                                <button class="tool" id="file-email-btn" onclick="emailFile()"><i class="fa fa-envelope-o"></i> Email</button>
-                                <button class="tool" id="file-savelcl-btn" onclick="saveLocal()"><i class="fa fa-sticky-note"></i> Save Locally</button>
-                                <button class="tool" id="file-savelcl-btn" onclick="loadLocalFiles()"><i class="fa fa-sticky-note-o"></i> Local Storage</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <button>Edit <i class='fa fa-caret-down'></i></button>
-                            <div class="dropdown-content">
-                                <button class="tool" id="edit-undo-btn" onclick="Undo()"><i class="fa fa-undo"></i> Undo</button>
-                                <button class="tool" id="edit-redo-btn" onclick="Redo()"><i class="fa fa-repeat"></i> Redo</button><hr>
-                                <button class="tool" id="edit-copy-btn" onclick="Copy()"><i class="fa fa-copy"></i> Copy</button>
-                                <button class="tool" id="edit-paste-btn" onclick="Paste()"><i class="fa fa-paste"></i> Paste</button>
-                                <button class="tool" id="edit-cut-btn" onclick="Cut()"><i class="fa fa-cut"></i> Cut</button><hr>
-                                <button class="tool" id="edit-clear-btn" onclick="Clear()"><i class="fa fa-trash-o"></i> Clear All</button>
-                                <button class="tool" id="edit-slctall-btn" onclick="slctAll()"><i class="fa fa-object-group"></i> Select All</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <button>Settings <i class='fa fa-caret-down'></i></button>
-                            <div class="dropdown-content">
-                                <button class="tool" id="set-zoomin-btn" onclick="Zoom(true)"><i class="fa fa-plus-circle"></i> Zoom In</button>
-                                <button class="tool" id="set-zoomout-btn" onclick="Zoom(false)"><i class="fa fa-minus-circle"></i> Zoom Out</button><hr>
-                                <button class="tool" id="set-settings-btn" onclick="Settings()"><i class="fa fa-wrench"></i> Preferences</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <button>View <i class='fa fa-caret-down'></i></button>
-                            <div class="dropdown-content">
-                                <button class="tool" id="set-theme-btn" onclick="Theme()"><i class="fa fa-paint-brush"></i> Theme</button><hr>
-                                <button class="tool" id="set-zoomin-btn" onclick="Type('text')"><i class="fa fa-font"></i> Text</button>
-                                <button class="tool" id="set-zoomout-btn" onclick="Type('html')"><i class="fa fa-code"></i> HTML</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown">
-                            <button>Help <i class='fa fa-caret-down'></i></button>
-                            <div class="dropdown-content">
-                                <a href="/projects/Textacular/help/"><button><i class="fa fa-question-circle"></i> Help</button></a>
-                                <a href="mailto:techlujo@gmail.com&subject=Feedback for Textacular&body= Thanks for using our free tool Textacular, please send us your feedback:">
-                                    <button><i class="fa fa-comment-o"></i> Feedback</button>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+            <div id="tabs">
             </div>
-            <div class="toolbar">
-                <ul class="tool-list">
-                    <li class="tool"><button id="file-save-btn" onclick="saveFile()"><i class="fa fa-save"></i></button></li>
-                    <li class="tool"><button id="file-open-btn" onclick="openFile('text')"><i class="fa fa-folder-open-o"></i></button></li>
-                    <li class="tool"><button id="edit-undo-btn" onclick="Undo()"><i class="fa fa-undo"></i></button></li>
-                    <li class="tool"><button id="edit-redo-btn" onclick="Redo()"><i class="fa fa-repeat"></i></button></li>
-                    <li class="tool"><button id="edit-copy-btn" onclick="Copy()"><i class="fa fa-copy"></i></button></li>
-                    <li class="tool"><button id="edit-paste-btn" onclick="Paste()"><i class="fa fa-paste"></i></button></li>
-                    <li class="tool"><button id="set-zoomout-btn" onclick="Zoom(false)"><i class="fa fa-minus-circle"></i></button></li>
-                    <li class="tool"><button id="set-zoom-btn" onclick="setZoom()">18px</button></li>
-                    <li class="tool"><button id="set-zoomin-btn" onclick="Zoom(true)"><i class="fa fa-plus-circle"></i></button></li>
-                    <li class="tool"><a href="/projects/Textacular/help/"><button><i class="fa fa-question-circle"></i></button></a></li>
-                </ul>
-            </div>
-            <div id="container" class="txt">
-                <textarea id="editor" style="font-size: 18px;" onkeyup="numColmn(this);" onmouseup="this.onkeyup();"></textarea><div id="output"></div></div>
-            </div>
-            <div id="theme-menu" class="menu">
-                <div class="menu-content">
-                    <h1>Theme</h1>
-                    <h3>Theme:</h3>
-                    <select id="theme-select" class="options" name="themes"></select>
-                    <div class="file-options">
-                        <button id="open-theme" onclick="editTheme()"><i class="fa fa-folder-open"></i></button>
-                        <button id="delete-theme" onclick="delTheme()"><i class="fa fa-trash"></i></button>
-                    </div><br>
-                    <h3 style="display: inline-block;">Preview:</h3><input type="checkbox" id="preview">
-                    <h3>Custom Theme:</h3>
-                    <textarea id="import-theme" class="options"></textarea>
-                    <div class="file-options">
-                        <button id="open-theme" onclick="saveTheme(); document.getElementById('apply-changes-theme').click()"><i class="fa fa-upload"></i></button>
-                    </div><br>
-                    <button id="apply-changes-theme" class="apply-changes">Apply Changes</button>
+            <div id="container">
+                <div id="line-count">
+                    <textarea class="line-row" id="line-row--text" rows="20" cols="4" value="1" readonly></textarea>
+                    <textarea class="line-row" id="line-row--css" rows="20" cols="4" value="1" readonly></textarea>
+                    <textarea class="line-row" id="line-row--javascript" rows="20" cols="4" value="1" readonly></textarea>
+                </div>
+                <div id="editor">
+                    <textarea class="editor-module"  id="editor-module--text" style="font-size: 18px;" spellcheck="false"></textarea>
+                    <textarea class="editor-module"  id="editor-module--css" style="font-size: 18px;" spellcheck="false"></textarea>
+                    <textarea class="editor-module"  id="editor-module--javascript" style="font-size: 18px;" spellcheck="false"></textarea>
+                </div>
+                <div id="output">
+                    <iframe id="output-frame"></iframe>
                 </div>
             </div>
-            <div id="settings-menu" class="menu">
-                <div class="menu-content">
-                    <h1>Preferences</h1>
-                    <h3>Font Family:</h3>
-                    <select id="font" class="options" name="fonts">
-                    </select>
-                    <button class="options" id="font-upload-btn" onclick="openFile('font')"><i class="fa fa-folder-open-o"></i> Upload font</button>
-                    <input type="file" id="font-upload" accept="font/ttf" hidden/>
-                    <h3>Font Weight:</h3>
-                    <select id="font-weight" class="options" name="font-weights">
-                        <option value="300">Light (300)</option>
-                        <option value="400">Regular (400)</option>
-                        <option value="500">Medium (500)</option>
-                        <option value="700">Bold (700)</option>
-                        <option value="900">Black (900)</option>
-                    </select>
-                    <button id="apply-changes-pref" class="apply-changes">Apply Changes</button>
-                </div>
-            </div>
-            <div id="localfiles-menu" class="menu">
-                <div class="menu-content">
-                    <h1>Local Storage</h1>
-                    <h3>Select:</h3>
-                    <select id="lclfiles" class="options" name="lclfiles"></select>
-                    <button id="open-lclfile" class="apply-changes" onclick="loadLocal(document.getElementById('lclfiles').value)">Open File</button>
-                    <button id="del-lclfile" class="apply-changes" onclick="delLocal(document.getElementById('lclfiles').value)">Delete File</button>
-                </div>
+            <div id="menu">
+                <div id="menu-content"></div>
             </div>
         </main>
-        <footer id="numColmn">
-            Line 0, Column 0
+        <footer>
+            <h6 class="footer" id="footer--lncol">Ln 0, Col 0</h6>
+            <h6 class="footer" id="footer--lang">TEXT</h6>
+            <h6 class="footer" id="footer--fontsize">18px</h6>
+            <input type="file" id="file-upload" accept="text/plain, text/html" hidden/>
         </footer>
-        <script src="/projects/Textacular/scripts/toolHandler.js"></script>
-        <script src="/projects/Textacular/scripts/settingsHandler.js"></script>
+        <script src="/scripts/functions.js"></script>
+        <script src="/scripts/preferences.js"></script>
+        <script src="/scripts/tools.js"></script>
+        <script src="/scripts/main.js"></script>
     </body>
 </html>
