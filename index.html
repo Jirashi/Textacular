@@ -24,16 +24,22 @@
             </div>
             <div id="container">
                 <div id="line-count">
-                    <textarea class="line-row" id="line-row--text" rows="20" cols="4" value="1" readonly></textarea>
-                    <textarea class="line-row" id="line-row--css" rows="20" cols="4" value="1" readonly></textarea>
-                    <textarea class="line-row" id="line-row--javascript" rows="20" cols="4" value="1" readonly></textarea>
+                    <textarea class="line-row" id="line-row--text" rows="21" cols="4" value="1" readonly></textarea>
+                    <textarea class="line-row" id="line-row--css" rows="21" cols="4" value="1" readonly></textarea>
+                    <textarea class="line-row" id="line-row--javascript" rows="21" cols="4" value="1" readonly></textarea>
                 </div>
                 <div id="editor">
+                    <span class="editor-title" id="editor-title--text">Text <button class="editor-close" onclick="View('text')"><i class="fa fa-close"></i></button></span>
                     <textarea class="editor-module"  id="editor-module--text" style="font-size: 18px;" spellcheck="false"></textarea>
+                    <span class="editor-title" id="editor-title--css">CSS <button class="editor-close" onclick="View('css')"><i class="fa fa-close"></i></button></span>
                     <textarea class="editor-module"  id="editor-module--css" style="font-size: 18px;" spellcheck="false"></textarea>
+                    <span class="editor-title" id="editor-title--javascript">JavaScript <button class="editor-close" onclick="View('javascript')"><i class="fa fa-close"></i></button></span>
                     <textarea class="editor-module"  id="editor-module--javascript" style="font-size: 18px;" spellcheck="false"></textarea>
                 </div>
                 <div id="output">
+                    <span class="editor-title" id="editor-title--html">HTML Output
+                        <button class="editor-close" onclick="View('html')"><i class="fa fa-close"></i></button>
+                        <button class="output-open" onclick="outputOpen()"><i class="fa fa-sticky-note"></i></button></span>
                     <iframe id="output-frame"></iframe>
                 </div>
             </div>

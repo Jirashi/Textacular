@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&display=swap');
 
+* {
+	outline: none;
+}
 html, body {
     margin: 0;
     padding: 0;
@@ -11,11 +14,16 @@ main {
 }
 
 footer {
+	font-family: Arial, Helvetica, sans-serif;
 	display: flex;
     position: fixed; 
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
 }
 
 /* menu bar */
@@ -81,6 +89,7 @@ footer {
 	justify-content: space-between;
 	padding: 5px 9px 5px 8px;
     transition: 0.5s ease;
+	cursor: pointer;
 }
 
 .tab-selected {
@@ -92,6 +101,7 @@ footer {
 	justify-content: space-between;
 	padding: 5px 10px 5px 10px;
     transition: 0.5s ease;
+	cursor: pointer;
 }
 
 .tab-content {
@@ -113,10 +123,6 @@ button.tab-content {
 	display: block;
 }
 
-.tab:hover textarea.tab-content {
-	cursor: default;
-}
-
 textarea.tab-content {
 	border: none;
 	font-family: Arial, Helvetica, sans-serif;
@@ -126,7 +132,7 @@ textarea.tab-content {
 	resize: none;
 	overflow: hidden;
 	width: 75%;
-	cursor: default;
+	cursor: pointer;
 }
 
 textarea.tab-content:focus {
@@ -153,17 +159,34 @@ textarea.tab-content:focus {
 	overflow-y: hidden; 
     text-align: right;
 	display: none;
-	margin: 3px 0;
-	padding: 2.34px 10px 1px 1px;
+	margin: 37px 0 0 0;
+	padding: 2.34px 10px 0px 1px;
 	font-size: 18px;
 	transition: 1s ease;
 	line-height: 22px;
 }
 
 #editor {
+	margin-top: 4px;
 	width: 50%;
 	display: flex;
 	flex-direction: column;
+}
+
+.editor-title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: medium;
+	padding: 6px 6px;
+	margin: 0;
+}
+
+.editor-title button {
+	background-color: #00000000;
+	float: right;
+	border: none;
+	margin: 0 0 0 5px;
+	cursor: pointer;
+	transition: 1s ease;
 }
 
 #output {
@@ -229,7 +252,7 @@ textarea.tab-content:focus {
 	height: 133.5px;
 }
 
-#menu-content h1, h3 {
+#menu-content h1, h2, h3, h4 {
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0;
 }
@@ -242,10 +265,18 @@ textarea.tab-content:focus {
 	text-align: center;
 }
 
+#menu-content h2 {
+	margin: 10px;
+}
+
 #menu-content h3 {
 	text-align: center;
 	margin-top: 10px;
 	padding: 5px 0;
+}
+
+#menu-content h4 {
+	margin: 10px;
 }
 
 #menu-content .close-menu {
@@ -287,9 +318,26 @@ textarea.tab-content:focus {
 	cursor: pointer;
 }
 
+.menu-list--li:hover .theme-preview, 
+.menu-list--li:hover .font-preview, 
+.menu-list--li-selected:hover .font-preview, 
+.menu-list--li-selected:hover .theme-preview  {
+	opacity: 100%;
+}
+
 #font-weights .menu-list--li button, 
 #font-weights .menu-list--li-selected button {
 	width: 100%;
+}
+
+.menu-select {
+	border: none;
+	margin: 0;
+	padding: 8px;
+}
+
+.checkbox h4, .checkbox input {
+	display: inline-block;
 }
 
 .apply-changes {
@@ -320,11 +368,44 @@ textarea.tab-content:focus {
 	text-overflow: ellipsis;
 }
 
-.menu-list--li:hover .theme-preview, 
-.menu-list--li:hover .font-preview, 
-.menu-list--li-selected:hover .font-preview, 
-.menu-list--li-selected:hover .theme-preview  {
-	opacity: 100%;
+.file-save {
+	display: flex;
+	align-content: space-between;
+}
+
+.file-preview {
+	width: 50%;
+	margin: 10px;
+	height: 400px;
+	overflow: hidden;
+}
+
+#file-preview--content {
+	border: none;
+	resize: none;
+	width: 100%;
+	height: 400px;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+.file-info {
+	width: 50%;
+	margin: 10px;
+	display: flex;
+	flex-flow: column;
+	justify-items: flex-start;
+}
+
+#file-type--select, #file-size {
+	width: 100%;
+}
+
+#file-title {
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 0 8px;
+	margin: 5px 0 10px 0;
 }
 
 button.theme-preview--color {
@@ -344,7 +425,6 @@ button.theme-preview--color span{
 	display: block;
 	text-overflow: ellipsis;
 }
-
 
 .footer {
 	margin: 10px;

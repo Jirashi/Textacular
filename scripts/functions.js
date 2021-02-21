@@ -1,11 +1,15 @@
 let tabs = {};
 let currentTab = "";
 let currentMode = "text";
+/* editors */
 let textEditor = document.getElementById('editor-module--text');
 let cssEditor = document.getElementById('editor-module--css');
 let jsEditor = document.getElementById('editor-module--javascript');
 let editor = document.getElementById('editor');
 let output = document.getElementById('output');
+/* settings */
+let tabsEnabled = true;
+let lineNumsEnabled = true;
 
 function tab(option, params) {
     let tabsDiv = document.getElementById('tabs');
@@ -74,8 +78,7 @@ function tab(option, params) {
             <div class="${tabType}" id="tab-${tabKey}" onclick="tab('selectTab', this.id.replace('tab-', ''))">
                 <textarea class="tab-content" id="tab--${tabKey}" spellcheck="false"></textarea>
                 <button class="tab-content" id="tab-btn--${tabKey}" onclick="tab('removeTab', this.id.replace('tab-btn--', ''))"><i class="fa fa-close"></i></button>
-            </div>
-        `
+            </div>`
         tabsDiv.insertAdjacentHTML('beforeend', tabTemplate);
         document.getElementById(`tab--${tabKey}`).value = tabName;
         document.getElementById(`tab--${tabKey}`).addEventListener('change', function(e) {
@@ -119,12 +122,16 @@ function splitText(fileText) {
 }
 
 function combineText() {
-    let combinedHTML = `
-    <head>
-        <style>${cssEditor.value}</style>
-    </head>
-    <body>${textEditor.value}<script>${jsEditor.value}</script></body>
-    `
+    let combinedHTML = 
+`<head>
+<style>${cssEditor.value}</style>
+</head>
+<body>
+${textEditor.value}
+<script>
+${jsEditor.value}
+</script>
+</body>`;
     return combinedHTML;
 }
 
@@ -136,15 +143,30 @@ function resetEditors() {
 }
 
 function updateOutput() {
-    let fullHTML = `
-    <style>
-        ${cssEditor.value}
-    </style>
-        ${textEditor.value}
-    <script>
-        ${jsEditor.value}
-    </script>
-    `
+    let style = "";
+    let script = "";
+    if (cssEditor.value) {
+        style = 
+`<style>
+${cssEditor.value}
+</style>`
+    }
+
+    if (jsEditor.value) {
+        script = 
+`<script>
+${jsEditor.value}
+</script>`
+    }
+
+    let fullHTML = 
+`<head>
+${style}
+</head>
+<body>
+    ${textEditor.value}
+${script}
+</body>`
     let outputWindow = document.getElementById('output-frame').contentWindow.document;
     outputWindow.open();
     outputWindow.write(fullHTML);
@@ -242,10 +264,26 @@ function createMenu(menuType) {
             }
         }
     } else if (menuType === "preferences") {
-        let fontWeights = [["300", "Light"],["400", "Regular"],["500", "Medium"],["700", "Bold"],["900", "Black"]]
-        
+        let lineNumsChecked = "checked";
+        let tabsChecked = "checked";
+        if (!lineNumsEnabled) {
+            lineNumsChecked = "";
+        }
+        if (!tabsEnabled) {
+            tabsChecked = "";
+        }
         menuContent = `
         <h1>Preferences</h1><button class="close-menu" onclick="menuClose()">X</button>
+        <h2>Display</h2>
+        <div class="checkbox">
+            <h4>Show line numbers</h4>
+            <input id="show-linenums" type="checkbox" ${lineNumsChecked}>
+        </div>
+        <div class="checkbox">
+            <h4>Show tabs</h4>
+            <input id="show-tabs" type="checkbox" ${tabsChecked}>
+        </div>
+        <h2>Font</h2>
         <h3>Font Library</h3>
         <div class="menu-list">
             <ul id="menu-list--fontfam" class="menu-list--ul">
@@ -254,6 +292,21 @@ function createMenu(menuType) {
         <h3>Font Weight</h3>
         <div class="menu-list" id="font-weights">
             <ul id="menu-list--fontweight" class="menu-list--ul">
+                <li class="menu-list--li" id="300" onclick="menuLISelect(this)">
+                    <button style="font-weight:300;">Light (300)</button>
+                </li>
+                <li class="menu-list--li-selected" id="400" onclick="menuLISelect(this)">
+                    <button style="font-weight:400;">Regular (400)</button>
+                </li>
+                <li class="menu-list--li" id="500" onclick="menuLISelect(this)">
+                    <button style="font-weight:500;">Medium (500)</button>
+                </li>
+                <li class="menu-list--li" id="700" onclick="menuLISelect(this)">
+                    <button style="font-weight:700;">Bold (700)</button>
+                </li>
+                <li class="menu-list--li" id="900" onclick="menuLISelect(this)">
+                    <button style="font-weight:900;">Black (900)</button>
+                </li>
             </ul>
         </div>
         <button id="apply-changes--preferences" class="apply-changes" onclick="menuClose(this)">Apply Changes</button>
@@ -272,17 +325,54 @@ function createMenu(menuType) {
             `
             document.getElementById('menu-list--fontfam').insertAdjacentHTML('beforeend', fontLI)
         }
-        for (let weight of fontWeights) {
-            let liClass = "menu-list--li";
-            if (textEditor.style.fontWeight == weight[0]) {
-                liClass = "menu-list--li-selected";
-            }
-            let fontLI = `
-                <li class="${liClass}" id="${weight[0]}" onclick="menuLISelect(this)">
-                    <button style="font-weight:${weight[0]};">${weight[1]} (${weight[0]})</button>
-                </li>
+    } else if (menuType === "save") {
+        if (currentTab && textEditor.value.length + cssEditor.value.length + jsEditor.value.length) {
+            menuContent = `
+            <h1>Save File</h1><button class="close-menu" onclick="menuClose()">X</button>
+            <div class="file-save">
+                <div class="file-preview">
+                    <textarea id="file-preview--content" disabled>${textEditor.value}</textarea>
+                </div>
+                <div class="file-info">
+                    <p id="file-title">${tabs[currentTab][0]} (${textEditor.value.length} bytes)</p>
+                    <select name="filetypes" id="file-type--select" class="menu-select">
+                        <option value="txt">Plain Text (.txt)</option>
+                        <option value="html">HTML (.html)</option>
+                        <option value="css">CSS (.css)</option>
+                        <option value="js">JavaScript (.js)</option>
+                    </select>
+                </div>
+            </div>
+            <button id="apply-changes--save" class="apply-changes" onclick="menuClose(this); fileSave(document.getElementById('file-type--select').value)">Export</button>
             `
-            document.getElementById('menu-list--fontweight').insertAdjacentHTML('beforeend', fontLI)
+            document.getElementById('menu-content').innerHTML = menuContent;
+            document.getElementById('file-type--select').addEventListener('change', function(e) {
+                let fileType = e.target.value;
+                let fileName = tabs[currentTab][0].split(tabs[currentTab][2])[0];
+                let filePreview = document.getElementById('file-preview--content');
+                let fileTitle = document.getElementById('file-title');
+
+                if (fileType === "txt") {
+                    filePreview.value = textEditor.value;
+                    fileTitle.innerText = `${fileName + fileType} (${textEditor.value.length} bytes)`;
+                } else if (fileType === "html") {
+                    let htmlFile = 
+`<!DOCTYPE html>
+<html>
+${document.getElementById('output-frame').contentWindow.document.getElementsByTagName('HTML')[0].innerHTML}
+</html>`;
+                    filePreview.value = htmlFile;
+                    fileTitle.innerText = `${fileName + fileType} (${htmlFile.length} bytes)`;
+                } else if (fileType === "css") {
+                    filePreview.value = cssEditor.value;
+                    fileTitle.innerText = `${fileName + fileType} (${cssEditor.value.length} bytes)`;
+                } else if (fileType === "js") {
+                    filePreview.value = jsEditor.value;
+                    fileTitle.innerText = `${fileName + fileType} (${jsEditor.value.length} bytes)`;
+                }
+            });
+        } else {
+            return;
         }
     }
     document.getElementById('menu').style.display = "block";
@@ -312,6 +402,26 @@ function menuClose(params) {
                 style([null, selected[0].id]);
             }
         } else if (option === "preferences") {
+            if (document.getElementById('show-linenums').checked) {
+                lineNumsEnabled = true;
+                for (let lineRow of document.getElementsByClassName('line-row')) {
+                    if (document.getElementById(`editor-module--${lineRow.id.split("line-row--")[1]}`).classList[0] === "editor-module--active") {
+                        lineRow.style.display = "block";
+                    }
+                }
+            } else {
+                lineNumsEnabled = false;
+                for (let lineRow of document.getElementsByClassName('line-row')) {
+                    lineRow.style.display = "none";
+                }
+            }
+            if (document.getElementById('show-tabs').checked) {
+                tabsEnabled = true;
+                document.getElementById('tabs').style.display = "block";
+            } else {
+                tabsEnabled = false;
+                document.getElementById('tabs').style.display = "none";
+            }
             if (selected) {
                 let font = [];
                 if (selected.length === 2) {

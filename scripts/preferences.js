@@ -69,20 +69,32 @@ function style(styleSettings) {
             body.${themeName} .tab-selected textarea.tab-content:focus {background-color: ${colors[2]}}
             body.${themeName} textarea.tab-content:focus {color: ${colors[4]}}
 
-            body.${themeName} .editor-module, .editor-module--active {background-color: ${colors[1]}; color:${colors[4]};  border-bottom: 0.5px solid ${colors[0]}}
+            body.${themeName} .editor-title {background-color: ${colors[2]}; color:${colors[5]}; border: 0.5px solid ${colors[3]};}
+            body.${themeName} .editor-title button {color:${colors[0]};}
+            body.${themeName} .editor-title button:hover {color:${colors[5]};}
+            body.${themeName} .editor-module, .editor-module--active {background-color: ${colors[1]}; color:${colors[4]};}
             body.${themeName} .line-row {background-color: ${colors[1]}; color:${colors[0]};}
-            body.${themeName} #output {background-color: #ffffff; border: 1px solid ${colors[3]};}
+            body.${themeName} #output-frame {background-color: #ffffff; border: 1px solid ${colors[3]};}
 
             body.${themeName} #menu-content {background-color: ${colors[2]}; border: 1px solid ${colors[0]};}
             body.${themeName} #menu-content h1, .close-menu {background-color: ${colors[1]}; color: ${colors[0]};}
-            body.${themeName} #menu-content h3 {background-color: ${colors[2]}; color: ${colors[4]};}
+            body.${themeName} #menu-content h2 {color: ${colors[4]};}
+            body.${themeName} #menu-content h3, h4 {background-color: ${colors[2]}; color: ${colors[4]};}
             body.${themeName} .menu-list--ul {background-color: ${colors[3]}; color: ${colors[4]}; border: 1px solid ${colors[3]};}
             body.${themeName} .menu-list--li, .menu-list--li button {background-color: ${colors[1]}; color: ${colors[0]};}
             body.${themeName} .menu-list--li-selected, .menu-list--li-selected button {background-color: ${colors[5]}; color: ${colors[1]};}
             body.${themeName} .menu-list--li:hover button {background-color: ${colors[3]}; color: ${colors[4]};}
-            body.${themeName} .apply-changes {background-color: ${colors[2]}; color: ${colors[0]};}
+            body.${themeName} .apply-changes {background-color: ${colors[1]}; color: ${colors[5]};}
             body.${themeName} .apply-changes:hover, .close-menu:hover {background-color: ${colors[3]}; color: ${colors[4]};}
             body.${themeName} button.tab-content:hover {background-color: ${colors[3]}; color: ${colors[5]};}
+            body.${themeName} .menu-select {background-color: ${colors[3]}; color: ${colors[4]};}
+
+            body.${themeName} #file-preview--content {background-color: ${colors[1]}; color:${colors[4]};}
+            body.${themeName} .file-preview {border: 1px solid ${colors[5]};}
+            body.${themeName} #file-title {color: ${colors[5]};}
+            ::-webkit-scrollbar-track {background:${colors[0]};}
+            ::-webkit-scrollbar-thumb {background:${colors[2]};}
+            ::-webkit-scrollbar-thumb:hover {background:${colors[3]};}
         `
         document.body.classList = themeName;
         document.getElementById('style').innerHTML = themeCSS;

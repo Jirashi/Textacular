@@ -1,5 +1,5 @@
 let editorsOpen = [];
-
+let selectionIndex = "";
 /* FILE TOOLS */
 function fileNew() {
     tab("addTab", [makeKey(6), "Untitled"]);
@@ -22,17 +22,29 @@ function fileOpen(file) {
     }
 }
 
-function fileSave() {
+function fileSave(fileType) {
     if (currentTab && textEditor.value.length + cssEditor.value.length + jsEditor.value.length) {
         let file = "";
-        let htmlFile = document.getElementById('output-frame').contentWindow.document.getElementsByTagName('HTML')[0].innerHTML;
-        if (tabs[currentTab][2] === "txt") {
-            file = new Blob([ textEditor.value ], { type: "text/plain" });
-        } else if (tabs[currentTab][2] === "html") {
-            file = new Blob([ `<!DOCTYPE html><html>${htmlFile}</html>` ], { type: "text/html" });
+        if (!fileType) {
+            fileType = tabs[currentTab][2];
         }
-        
-        var filename = tabs[currentTab][0];
+
+        let filename = tabs[currentTab][0].split(tabs[currentTab][2])[0] + `${fileType}`;
+        if (fileType === "txt") {
+            file = new Blob([textEditor.value], {type: "text/plain"});
+        } else if (fileType === "html") {
+            let htmlFile = document.getElementById('output-frame').contentWindow.document.getElementsByTagName('HTML')[0].innerHTML;
+            file = new Blob([
+`<!DOCTYPE html>
+<html>
+    ${htmlFile}
+</html>`
+            ], {type: "text/html"});
+        } else if (fileType === "css") {
+            file = new Blob([cssEditor.value], {type: "text/css"});
+        } else if (fileType === "js") {
+            file = new Blob([jsEditor.value], {type: "text/javascript"});
+        }
 
         if (window.navigator.msSaveOrOpenBlob) // IE10+
             window.navigator.msSaveOrOpenBlob(file, filename);
@@ -49,6 +61,18 @@ function fileSave() {
             }, 0); 
         }
     }
+}
+
+function outputOpen() {
+    let htmlDoc = document.getElementById('output-frame').contentWindow.document.getElementsByTagName('HTML')[0].innerHTML;
+    let htmlFile = new Blob([
+`<!DOCTYPE html>
+<html>
+${htmlDoc}
+</html>`
+    ], {type: "text/html"});
+    const fileObjectURL = URL.createObjectURL(htmlFile);
+    window.open(fileObjectURL);
 }
 
 function fileEmail() {
@@ -77,6 +101,41 @@ function selectAll() {
     if (currentTab && document.getElementById(`editor-module--${lang}`).value.length) {
         document.getElementById(`editor-module--${lang}`).select();
     }
+}
+
+function Undo() {
+    document.execCommand("undo");
+}
+
+function Redo() {
+    document.execCommand("redo");
+}
+
+function Copy() {
+    document.execCommand("copy");
+}
+
+function Cut() {
+    document.execCommand("cut");
+}
+
+function Paste() {
+    let lang = document.getElementById('footer--lang').innerText.toLowerCase();
+    let textarea = document.getElementById(`editor-module--${lang}`);
+    navigator.clipboard.readText()
+    .then(text => {
+        if (currentTab && textarea && text) {
+            if (textarea.selectionStart) {
+                selectionIndex = textarea.selectionStart;
+            }
+            var str = textarea.value.substring(0, selectionIndex) + text + textarea.value.substring(selectionIndex);
+            textarea.value = str;
+            selectionIndex = selectionIndex + text.length;
+        }
+    })
+    .catch(err => {
+        return;
+    });
 }
 
 /* SETTINGS TOOLS */
@@ -133,6 +192,8 @@ function View(type) {
             target.className = "tool-dropdown--btn";
             if (targetModule) {
                 targetModule.className = "editor-module";
+            }
+            if (lineNumsEnabled && targetLineRow) {
                 targetLineRow.style.display = "none";
             }
         }
@@ -141,6 +202,8 @@ function View(type) {
         target.className += "-highlighted";
         if (targetModule) {
             targetModule.className += "--active";
+        }
+        if (lineNumsEnabled && targetLineRow) {
             targetLineRow.style.display = "block";
         }
     }
@@ -159,6 +222,14 @@ function View(type) {
         output.style.display = "none";
         editor.style.width = "100%";
     }
+    for (let title of document.getElementsByClassName('editor-title')) {
+        if (editorsOpen.includes(title.id.split("editor-title--")[1])) {
+            title.style.display = "block";
+        } else {
+            title.style.display = "none";
+        }
+    }
+    
 }
 
 /* HELP TOOLS */
