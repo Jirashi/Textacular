@@ -5,7 +5,6 @@ let themes = {
     "one-dark-pro": [["#787d86", "#282c34", "#20232a", "#21252b", "#abb2bf", "#98c375"], "dark"],
     "one-light-pro": [["#595852", "#d6d3c2", "#c1beaf", "#d0cdbb", "#464541", "#595852"], "light"],
     "bluloco-light": [["#abacb1", "#fafafa", "#ebebeb", "#c9cbce", "#40424b", "#275fe4"], "light"],
-    "bluloco-dark": [["#abacb1", "#fafafa", "#ebebeb", "#c9cbce", "#40424b", "#275fe4"], "dark"],
     "night-owl": [["#465e73", "#001122", "#000c18", "#010d17", "#d0dee3", "#0b2942"], "dark"],
     "dracula": [["#44475a", "#282a36", "#22222c", "#191923", "#f8f8f2", "#6272a4"], "dark"],
 }

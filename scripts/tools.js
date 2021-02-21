@@ -234,5 +234,9 @@ function View(type) {
 
 /* HELP TOOLS */
 function Help() {
-    
+    window.location = "/help";
+}
+
+function Feedback() {
+    window.location.href = "mailto:techlujo@gmail.com?subject=Feedback for Textacular";
 }
