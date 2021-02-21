@@ -234,7 +234,7 @@ function View(type) {
 
 /* HELP TOOLS */
 function Help() {
-    window.location = "/textacular.github.io/help";
+    window.open('/textacular.github.io/help', '_blank');
 }
 
 function Feedback() {
