@@ -42,7 +42,7 @@ function loadTools(tools) {
 
 function setUp() {
     /* get tools.json */
-    fetch(new Request("/scripts/tools.json")).then(response => response.json()).then(function(data) {
+    fetch(new Request("/textacular.github.io/scripts/tools.json")).then(response => response.json()).then(function(data) {
         const tools = data;
         loadTools(tools);
     }).then(function() {
