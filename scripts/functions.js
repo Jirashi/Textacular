@@ -100,9 +100,9 @@ function tab(option, params) {
             let tabType = "tab";
             if (selected === tab) {
                 tabType = "tab-selected";
-                textEditor.value = splitText(tabs[tab][1])[0];
-                cssEditor.value = splitText(tabs[tab][1])[1];
-                jsEditor.value = splitText(tabs[tab][1])[2];
+                textEditor.value = tabs[tab][1][1];
+                cssEditor.value = tabs[tab][1][0];
+                jsEditor.value = tabs[tab][1][2];
                 updateOutput();
             }
             makeTab(tab, tabs[tab][0], tabType)
@@ -110,28 +110,8 @@ function tab(option, params) {
     }
 }
 
-function splitText(fileText) {
-    let splitHTML = fileText.split("<head>")[1].split("<style>")[1].split("</style>");
-    let cssContent = splitHTML[0];
-    splitHTML = splitHTML[1].split("</head>")[1].split("<body>")[1].split("<script>");
-    let htmlContent = splitHTML[0];
-    splitHTML = splitHTML[1].split("</script>")
-    let jsContent = splitHTML[0];
-
-    return [htmlContent, cssContent, jsContent]
-}
-
 function combineText() {
-    let combinedHTML = 
-`<head>
-<style>${cssEditor.value}</style>
-</head>
-<body>
-${textEditor.value}
-<script>
-${jsEditor.value}
-</script>
-</body>`;
+    let combinedHTML = [cssEditor.value, textEditor.value, jsEditor.value];
     return combinedHTML;
 }
 
@@ -143,10 +123,11 @@ function resetEditors() {
 }
 
 function updateOutput() {
-    let style = "";
-    let script = "";
-    if (cssEditor.value) {
-        style = 
+    if (editorsOpen.includes("html")) {
+        let style = "";
+        let script = "";
+        if (cssEditor.value) {
+            style = 
 `<style>
 ${cssEditor.value}
 </style>`
@@ -167,10 +148,11 @@ ${style}
     ${textEditor.value}
 ${script}
 </body>`
-    let outputWindow = document.getElementById('output-frame').contentWindow.document;
-    outputWindow.open();
-    outputWindow.write(fullHTML);
-    outputWindow.close();
+        let outputWindow = document.getElementById('output-frame').contentWindow.document;
+        outputWindow.open();
+        outputWindow.write(fullHTML);
+        outputWindow.close();
+    }
 }
 
 function footer(textarea) {
@@ -214,7 +196,28 @@ function addListeners() {
     }
     document.getElementById('file-upload').addEventListener('change', function(e) {
         fileOpen(e.target.files[0]);
-    })
+    });
+    document.getElementById('menu-bar--tabs').addEventListener('mouseover', function(e) {
+        if (e.target.classList[0] === "menu-bar--tool--btn" || e.target.classList[0] === "fa fa-caret-down") {
+            let dropdown = document.getElementById('menu-bar--tabs').childNodes[3]
+            if (!tabsEnabled || window.innerWidth < 700) {
+                dropdown.innerHTML = "";
+                for (let tab in tabs) {
+                    let tabClass = "tool-dropdown--btn";
+                    if (currentTab === tab) {
+                        tabClass = "tool-dropdown--btn-highlighted";
+                    }
+                    let tabHTML = 
+                    `<button class="${tabClass}" id="tabs-${tab}--btn" onclick="tab('selectTab','${tab}')">
+                        <i class="fa fa-file-text"></i> ${tabs[tab][0]}
+                    </button>
+                    `
+                    dropdown.insertAdjacentHTML('beforeend', tabHTML);
+                }
+            }
+        }
+    });
+    
 }
 
 function makeKey(length) {
@@ -417,10 +420,12 @@ function menuClose(params) {
             }
             if (document.getElementById('show-tabs').checked) {
                 tabsEnabled = true;
-                document.getElementById('tabs').style.display = "block";
+                document.getElementById('tabs').style.display = "flex";
+                document.getElementById('menu-bar--tabs').style.display = "none";
             } else {
                 tabsEnabled = false;
                 document.getElementById('tabs').style.display = "none";
+                document.getElementById('menu-bar--tabs').style.display = "block";
             }
             if (selected) {
                 let font = [];

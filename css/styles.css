@@ -140,6 +140,14 @@ textarea.tab-content:focus {
 	cursor: text;
 }
 
+#menu-bar--tabs {
+	display: none;
+}
+
+#menu-bar--tabs:hover div.tool--dropdown {
+	display: block;
+}
+
 /* editor */
 #container {
 	display: flex;
@@ -434,5 +442,8 @@ button.theme-preview--color span{
 @media only screen and (max-width: 700px) {
 	#tabs {
 		display: none;
+	}
+	#menu-bar--tabs {
+		display: block;
 	}
 }

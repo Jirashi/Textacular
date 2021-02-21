@@ -233,3 +233,6 @@ function View(type) {
 }
 
 /* HELP TOOLS */
+function Help() {
+    
+}
