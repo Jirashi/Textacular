@@ -234,7 +234,7 @@ function View(type) {
 
 /* HELP TOOLS */
 function Help() {
-    window.location = "/help";
+    window.location = "./help";
 }
 
 function Feedback() {
