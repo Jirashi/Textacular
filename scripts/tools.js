@@ -1,6 +1,6 @@
 // FILE TOOLS
-function newFile() {
-    addTab(config["defaultFileName"], config["defaultFileType"]);
+function newFile(type) {
+    addTab(config["defaultFileName"], type);
 }
 
 function openFile(file) {

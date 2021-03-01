@@ -35,7 +35,7 @@ textEditor.addEventListener('scroll', function(e) {
 });
 
 document.getElementById('file-upload').addEventListener('change', function(e) {
-    fileOpen(e.target.files[0]);
+    openFile(e.target.files[0]);
 });
 
 /* document.getElementById('menu-bar--tabs').addEventListener('mouseover', function(e) {

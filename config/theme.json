@@ -33,6 +33,10 @@
     ".apply-changes:hover, .close-menu:hover, .menu-select":{"background-color":3, "color":4},
     "button.tab-content:hover":{"background-color":3, "color":5},
     
+    "#main-menu h1, #main-menu button, #main-menu button.close-menu":{"background-color":5, "color":1},
+    "#main-menu button:hover":{"background-color":3, "color":4},
+    "#main-menu a":{"color":5},
+
     "::-webkit-scrollbar-track":{"background":0},
     "::-webkit-scrollbar-thumb":{"background":2},
     "::-webkit-scrollbar-thumb:hover":{"background":3}

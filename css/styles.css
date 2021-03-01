@@ -330,6 +330,21 @@ textarea.tab-content:focus {
 	opacity: 100%;
 }
 
+#main-menu { text-align: center; }
+#main-menu button.close-menu { border-radius: 0; }
+#main-menu .new-file-types { display: flex; width: 50%; margin: 20px auto;}
+#main-menu .new-file-types button { width: 25%; margin: 0 1%;}
+
+#main-menu button {
+	border: none;
+	border-radius: 10px;
+	width: 50%;
+	padding: 10px;
+	margin: 10px 25%;
+	cursor: pointer;
+	transition: 1s ease;
+}
+
 #font-weights .menu-list--li button, 
 #font-weights .menu-list--li-selected button {
 	width: 100%;

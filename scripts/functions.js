@@ -65,6 +65,26 @@ function removeTab(key) {
     delete tabs[key];
     loadTabs();
     View("txt");
+    if (Object.keys(tabs).length === 0) {
+        let menuContent = `
+        <div id="main-menu">
+            <h1>Textacular v3</h1><button class="close-menu" onclick="menuClose()">X</button>
+            <button onclick="newFile(); menuClose();">New file</button><br>
+            <button onclick="openFile(); menuClose();">Open file</button><br>
+            <hr>
+            <div class="new-file-types">
+                <button onclick="newFile('txt'); menuClose();">.txt</button>
+                <button onclick="newFile('html'); menuClose();">.html</button>
+                <button onclick="newFile('css'); menuClose();">.css</button>
+                <button onclick="newFile('js'); menuClose();">.js</button>
+            </div>
+
+            <span><a href="https://github.com/Jirashi/Textacular">Textacular</a> | Version 3.0 | Jirashi™ 2020</span>
+        </div>
+        `
+        document.getElementById('menu-content').innerHTML = menuContent;
+        document.getElementById('menu').style.display = "block";
+    }
 }
 
 function loadTab(key) {
