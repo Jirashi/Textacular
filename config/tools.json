@@ -1,0 +1,120 @@
+[
+    {
+        "name":"file",
+        "content":[
+            {
+                "id":"new",
+                "function":["newFile"]
+            },
+            {
+                "id":"open",
+                "function":["openFile"]
+            },
+            {
+                "id":"save",
+                "function":["saveFile"]
+            },
+            {
+                "id":"saveas",
+                "name":"Save As...",
+                "function":["saveFileAs"]
+            },
+            {
+                "id":"email",
+                "function":["emailFile"]
+            }
+        ]
+    },
+    {
+        "name":"edit",
+        "content":[
+            {
+                "id":"undo",
+                "function":["Undo"]
+            },
+            {
+                "id":"redo",
+                "function":["Redo"]
+            },
+            {
+                "id":"copy",
+                "function":["Copy"]
+            },
+            {
+                "id":"cut",
+                "function":["Cut"]
+            },
+            {
+                "id":"paste",
+                "function":["Paste"]
+            },
+            {
+                "id":"clear",
+                "name":"Delete All",
+                "function":["deleteAll"]
+            },
+            {
+                "id":"selectall",
+                "name":"Select All",
+                "function":["selectAll"]
+            }
+        ]
+    },
+    {
+        "name":"settings",
+        "content":[
+            {
+                "id":"zoomin",
+                "name":"Zoom In",
+                "function":["Zoom", "'in'"]
+            },
+            {
+                "id":"zoomout",
+                "name":"Zoom Out",
+                "function":["Zoom", "'out'"]
+            },
+            {
+                "id":"split"
+            },
+            {
+                "id":"preferences",
+                "function":["Preferences"]
+            }
+        ]
+    },
+    {
+        "name":"view",
+        "content":[
+            {
+                "id":"theme",
+                "function":["Theme"]
+            },
+            {
+                "id":"split"
+            },
+            {
+                "id":"html",
+                "name":"HTML Output",
+                "function":["View", "'html'"]
+            }
+        ]
+    },
+    {
+        "name":"help",
+        "content":[
+            {
+                "id":"help",
+                "function":["Help"]
+            },
+            {
+                "id":"feedback",
+                "function":["Feedback"]
+            }
+        ]
+    },
+    {
+        "name":"tabs",
+        "content":[]
+    }
+]
+

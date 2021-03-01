@@ -2,20 +2,20 @@
 <html>
     <head>
         <title>Textacular</title>
-        <link rel="icon" href="/textacular.github.io/assets/TexttacularIcon(White).ico">
+        <link rel="icon" href="./assets/Textacular.png">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/textacular.github.io/css/styles.css">
+        <link rel="stylesheet" href="./css/styles.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500;800&family=Lora:wght@400;500;700&family=Open+Sans:wght@300;400;700&family=Roboto+Mono:wght@300;400;500;700&family=Roboto:wght@300;400;500;700;900&family=Share+Tech+Mono&family=Source+Code+Pro:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet"> 
         <style id="style"></style>
     </head>
-    <body onload="setUp()">
-        <script>"load"</script>
+    <body onload="initialize()">
+        <script>0</script>
         <header>
-            <div class="menu-bar">
-                <ul id="menu-bar--ul">
+            <div class="toolbar">
+                <ul id="toolbar--ul">
                 </ul>
             </div>
         </header>
@@ -23,23 +23,17 @@
             <div id="tabs">
             </div>
             <div id="container">
-                <div id="line-count">
-                    <textarea class="line-row" id="line-row--text" rows="21" cols="4" value="1" readonly></textarea>
-                    <textarea class="line-row" id="line-row--css" rows="21" cols="4" value="1" readonly></textarea>
-                    <textarea class="line-row" id="line-row--javascript" rows="21" cols="4" value="1" readonly></textarea>
+                <div id="gutter">
+                    <textarea class="line-row" id="line-row" rows="21" cols="4" value="1" readonly></textarea>
                 </div>
                 <div id="editor">
-                    <span class="editor-title" id="editor-title--text">Text <button class="editor-close" onclick="View('text')"><i class="fa fa-close"></i></button></span>
-                    <textarea class="editor-module"  id="editor-module--text" style="font-size: 18px;" spellcheck="false"></textarea>
-                    <span class="editor-title" id="editor-title--css">CSS <button class="editor-close" onclick="View('css')"><i class="fa fa-close"></i></button></span>
-                    <textarea class="editor-module"  id="editor-module--css" style="font-size: 18px;" spellcheck="false"></textarea>
-                    <span class="editor-title" id="editor-title--javascript">JavaScript <button class="editor-close" onclick="View('javascript')"><i class="fa fa-close"></i></button></span>
-                    <textarea class="editor-module"  id="editor-module--javascript" style="font-size: 18px;" spellcheck="false"></textarea>
+                    <span class="editor-title" id="editor-title">Text <button class="editor-close" onclick="View('text')"><i class="fa fa-close"></i></button></span>
+                    <textarea class="editor-module--active"  id="text-editor" style="font-size: 18px;" spellcheck="false"></textarea>
                 </div>
                 <div id="output">
                     <span class="editor-title" id="editor-title--html">HTML Output
                         <button class="editor-close" onclick="View('html')"><i class="fa fa-close"></i></button>
-                        <button class="output-open" onclick="outputOpen()"><i class="fa fa-sticky-note"></i></button></span>
+                        <button class="output-open" onclick="openOutput()"><i class="fa fa-sticky-note"></i></button></span>
                     <iframe id="output-frame"></iframe>
                 </div>
             </div>
@@ -53,9 +47,9 @@
             <h6 class="footer" id="footer--fontsize">18px</h6>
             <input type="file" id="file-upload" accept="text/plain, text/html" hidden/>
         </footer>
-        <script src="/textacular.github.io/scripts/functions.js"></script>
-        <script src="/textacular.github.io/scripts/preferences.js"></script>
-        <script src="/textacular.github.io/scripts/tools.js"></script>
-        <script src="/textacular.github.io/scripts/main.js"></script>
+        <script src="./scripts/functions.js"></script>
+        <script src="./scripts/tools.js"></script>
+        <script src="./scripts/handlers.js"></script>
+        <script src="./scripts/main.js"></script>
     </body>
 </html>

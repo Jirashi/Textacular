@@ -1,0 +1,39 @@
+{
+    "defaultFileName":"Untitled",
+    "defaultFileType":"txt",
+    "defaultTheme":"default-light",
+    "defaultFont":"Arial",
+    "lineNumsEnabled":true,
+    "tabsEnabled":true,
+    "themeLibrary":{
+        "default-light": [["#a5a7a2", "#ffffff", "#f7f9fa", "#f3f3f3", "#373b3d", "#369ada"], "light"],
+        "default-dark": [["#414141", "#1a1a1a", "#161616", "#121212", "#eaeaea", "#007acc"], "dark"],
+        "one-dark-pro": [["#787d86", "#282c34", "#20232a", "#21252b", "#abb2bf", "#98c375"], "dark"],
+        "one-light-pro": [["#595852", "#d6d3c2", "#c1beaf", "#d0cdbb", "#464541", "#595852"], "light"],
+        "bluloco-light": [["#abacb1", "#fafafa", "#ebebeb", "#c9cbce", "#40424b", "#275fe4"], "light"],
+        "night-owl": [["#465e73", "#001122", "#000c18", "#010d17", "#d0dee3", "#0b2942"], "dark"],
+        "dracula": [["#44475a", "#282a36", "#22222c", "#191923", "#f8f8f2", "#6272a4"], "dark"]
+    },
+    "fontLibrary":{
+        "Arial":"Arial, Helvetica, sans-serif",
+        "Verdana":"Verdana, sans-serif",
+        "Helvetica":"Helvetica, sans-serif",
+        "Tahoma":"Tahoma, sans-serif",
+        "Trebuchet MS":"'Trebuchet MS', sans-serif",
+        "Times New Roman":"'Times New Roman', serif",
+        "Georgia":"Georgia, serif",
+        "Garamond":"Garamond, serif",
+        "Courier New":"'Courier New', monospace",
+        "Exo 2":"'Exo 2', monospace",
+        "Jetbrains Mono":"'Jetbrains Mono', monospace",
+        "Open Sans":"'Open Sans', sans-serif",
+        "Roboto":"'Roboto', sans-serif",
+        "Roboto Mono":"'Roboto Mono', monospace",
+        "Share Tech Mono":"'Share Tech Mono', monospace",
+        "Space Mono":"'Space Mono', monospace",
+        "VT323":"'VT323', monospace",
+        "Lora":"'Lora', serif",
+        "Comic Sans MS":"'Comic Sans MS', 'Comic Sans', cursive",
+        "Brush Script MT":"'Brush Script MT', cursive"
+    }
+}

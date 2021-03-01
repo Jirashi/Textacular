@@ -1,0 +1,39 @@
+{
+    "body":{"background-color":1},
+    "header, footer":{"background-color":2, "color":0},
+    "footer":{"background-color":3},
+
+    ".toolbar--tool--btn, .tool-dropdown--btn":{"background-color":2, "color":4},
+    ".tool-dropdown--btn:hover, .tool-dropdown--btn-highlighted":{"background-color":1},
+    "hr":{"border: 0.5px solid":3},
+    ".tool-dropdown--btn-highlighted, #file-title":{"color":5},
+
+    "#tabs":{"background-color":3, "border-bottom: 0.5px solid":0},
+    ".tab":{"background-color":3, "border-right: 1px solid":2, "border-left: 1px solid":2},
+    ".tab-selected":{"background-color":1, "border: 0 1px 1px 1px solid":3, "border-top: 1px solid":5},
+    "button.tab-content, .tab-selected textarea.tab-content":{"background-color":1, "color":4},
+    "textarea.tab-content":{"background-color":3, "color":0},
+    "textarea.tab-content:focus":{"background-color":2, "color":4},
+    
+    ".line-row":{"background-color":1, "color":0},
+    ".editor-title":{"background-color":2, "color":5, "border: 0.5px solid":3},
+    ".editor-title button":{"color":0},
+    ".editor-title button:hover":{"color":5},
+    ".editor-module, .editor-module--active, #file-preview--content":{"background-color":1, "color":4},
+    "#output-frame":{"border: 1px solid":3},
+
+    "#menu-content":{"background-color":2, "border: 1px solid":0},
+    "#menu-content h1, .close-menu, .menu-list--li, .menu-list--li button":{"background-color":1, "color":0},
+    "#menu-content h2":{"color":4},
+    "#menu-content h3, h4":{"background-color":2, "color":4},
+    ".menu-list--ul":{"background-color":3, "color":4, "border: 1px solid":3},
+    ".menu-list--li-selected, .menu-list--li-selected button":{"background-color":5, "color":1},
+    ".menu-list--li:hover button":{"background-color":3, "color":4},
+    ".apply-changes":{"background-color":1, "color":5},
+    ".apply-changes:hover, .close-menu:hover, .menu-select":{"background-color":3, "color":4},
+    "button.tab-content:hover":{"background-color":3, "color":5},
+    
+    "::-webkit-scrollbar-track":{"background":0},
+    "::-webkit-scrollbar-thumb":{"background":2},
+    "::-webkit-scrollbar-thumb:hover":{"background":3}
+}
