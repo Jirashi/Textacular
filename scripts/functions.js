@@ -79,7 +79,7 @@ function removeTab(key) {
                 <button onclick="newFile('js'); menuClose();">.js</button>
             </div>
 
-            <span><a href="https://github.com/Jirashi/Textacular">Textacular</a> | Version 3.0 | Jirashi™ 2020</span>
+            <span><a href="https://github.com/Jirashi/Textacular">Textacular</a> | Version 3.1 | Jirashi™ 2020</span>
         </div>
         `
         document.getElementById('menu-content').innerHTML = menuContent;
@@ -100,6 +100,8 @@ function loadTab(key) {
             View(tabs[key][2]);
         } else { return; }
         loadTabs();
+        lineNum();
+        if (tabs[currentTab][2] === "html") { updateOutput(); View('html'); }
     }
 }
 
@@ -116,7 +118,7 @@ function loadTabs() {
     function makeTab(key, name, selected) {
         let tabTemplate = 
         `<div class="${selected || "tab"}" id="tab-${key}" onclick="loadTab(this.id.replace('tab-', ''))">
-            <textarea class="tab-content" id="tab--textarea-${key}" spellcheck="false"></textarea>
+            <textarea class="tab-content" id="tab--textarea-${key}" spellcheck="false" rows="1"></textarea>
             <button class="tab-content" id="tab--btn-${key}" onclick="removeTab(this.id.replace('tab--btn-', ''))"><i class="fa fa-close"></i></button>
         </div>`
         tabBar.insertAdjacentHTML('beforeend', tabTemplate);
@@ -144,7 +146,7 @@ function loadTabs() {
 
 // STYLE FUNCTIONS
 // ===============
-function loadTheme(colors) {
+function loadTheme(name, colors) {
     // Fetching theme file
     fetch(new Request("./config/theme.json")).then(response => response.json()).then(function(data) {
         const style = data;
@@ -167,6 +169,7 @@ function loadTheme(colors) {
             document.getElementById('style').insertAdjacentHTML('beforeend', elmnt);
         }
     });
+    document.body.classList = name;
 }
 
 function loadFont(fontFamily, fontWeight) {
@@ -198,7 +201,7 @@ function menuClose(params) {
 
         if (option === "theme") {
             if (selected) {
-                loadTheme(config["themeLibrary"][selected[0].id][0])
+                loadTheme(selected[0].id, config["themeLibrary"][selected[0].id][0])
             }
         } else if (option === "preferences") {
             // Line number checked
@@ -225,10 +228,10 @@ function menuClose(params) {
             if (selected) {
                 let font = [];
                 if (selected.length === 2) {
-                    font = [selected[0].id, selected[1].id];
+                    font = [config["fontLibrary"][selected[0].id], selected[1].id];
                 } else {
                     if (config["fontLibrary"][selected[0].id]) {
-                        font = [selected[0].id, null];
+                        font = [config["fontLibrary"][selected[0].id], null];
                     } else {
                         font = [null, selected[0].id];
                     }
@@ -245,3 +248,28 @@ function menuClose(params) {
     document.getElementById('menu').style.display = "none";
 }
 
+// OTHER FUNCTIONS
+// ===============
+function footer(textarea) {
+    var textLines = textarea.value.substr(0, textarea.selectionStart).split("\n");
+    var currentLineNumber = textLines.length;
+    var currentColumnIndex = textLines[textLines.length-1].length;
+    document.getElementById('footer--lncol').innerText = "Ln " + currentLineNumber+", Col " + currentColumnIndex;
+    document.getElementById('footer--lang').innerText = currentMode.toUpperCase();
+}
+
+function lineNum() {
+    var i;
+    var str = '';
+    for (i = 1; i <= textEditor.value.split('\n').length; i++) {
+        str = str + i.toString() + '\n';
+    }
+    document.getElementById('line-row').value = str;
+}
+
+function updateOutput() {
+    let idoc = document.getElementById('output-frame').contentWindow.document;
+    idoc.open();
+    idoc.write(textEditor.value);
+    idoc.close();
+}

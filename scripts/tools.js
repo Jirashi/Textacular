@@ -8,7 +8,14 @@ function openFile(file) {
         const reader = new FileReader();
         reader.readAsText(file);
         reader.onload = function(e) {
-            addTab(file.name, file.type.split("/")[1], e.target.result)
+            // Some types are not the right format
+            let fileType = file.type.split("/")[1];
+            if (fileType === "plain") {
+                fileType = "txt";
+            } else if (fileType === "javascript") {
+                fileType = "js";
+            }
+            addTab(file.name, fileType, e.target.result)
         };
     } else {
         return document.getElementById('file-upload').click();
@@ -198,7 +205,8 @@ function Preferences() {
     let fonts = config["fontLibrary"];
     for (let font in fonts) {
         let liClass = "menu-list--li";
-        if (textEditor.style.fontFamily.replaceAll("\"", "\'") == fonts[font]) {
+        
+        if (textEditor.style.fontFamily == fonts[font]) {
             liClass = "menu-list--li-selected";
         }
         let fontLI = `
@@ -221,10 +229,10 @@ function Zoom(value) {
     lineNumRow.style.lineHeight = (fontSize + 4) + "px";
     lineNumRow.style.paddingTop = (fontSize + 4) / 9.5 + "px";
 
-    document.getElementById('footer--fontsize').innerText = module.style.fontSize;
+    document.getElementById('footer--fontsize').innerText = textEditor.style.fontSize;
 
     function getFontSize() {
-        fontSize = parseInt(textEditor.style.fontSize.split("px")[0]);
+        let fontSize = parseInt(textEditor.style.fontSize.split("px")[0]);
         if (value === "in") {
             if (30 >= fontSize) {
             return fontSize + 2;

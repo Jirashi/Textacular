@@ -58,31 +58,3 @@ document.getElementById('file-upload').addEventListener('change', function(e) {
         }
     }
 }); */
-
-// FUNCTIONS
-function footer(textarea) {
-    var textLines = textarea.value.substr(0, textarea.selectionStart).split("\n");
-    var currentLineNumber = textLines.length;
-    var currentColumnIndex = textLines[textLines.length-1].length;
-    document.getElementById('footer--lncol').innerText = "Ln " + currentLineNumber+", Col " + currentColumnIndex;
-    document.getElementById('footer--lang').innerText = currentMode.toUpperCase();
-}
-
-function lineNum(textarea) {
-    var textLines = textarea.value.split('\n');
-    var lineRow = document.getElementById('line-row');
-
-    var i;
-    var str = '';
-    for (i = 1; i <= textLines.length; i++) {
-        str = str + i.toString() + '\n';
-    }
-    lineRow.value = str;
-}
-
-function updateOutput() {
-    let idoc = document.getElementById('output-frame').contentWindow.document;
-    idoc.open();
-    idoc.write(textEditor.value);
-    idoc.close();
-}

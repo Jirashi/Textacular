@@ -1,4 +1,8 @@
 /* GENERAL */
+* {
+	outline: none;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -127,6 +131,7 @@ textarea.tab-content {
 	height: 16px;
 	resize: none;
 	overflow: hidden;
+	text-overflow: ellipsis;
 	width: 75%;
 	cursor: pointer;
 }
@@ -136,11 +141,11 @@ textarea.tab-content:focus {
 	cursor: text;
 }
 
-#menu-bar--tabs {
+#toolbar--tabs {
 	display: none;
 }
 
-#menu-bar--tabs:hover div.tool--dropdown {
+#toolbar--tabs:hover div.tool--dropdown {
 	display: block;
 }
 
@@ -225,6 +230,8 @@ textarea.tab-content:focus {
 	display: none;
 }
 
+/* MENU */
+
 #menu {
 	display: none; 
 	position: fixed; 
@@ -290,9 +297,9 @@ textarea.tab-content:focus {
 	margin: 0;
 	font-size: 100%;
 	font-weight: bold;
-	padding: 19px 0;
+	padding: 19.5px 0;
 	display: inline-block;
-	vertical-align: 5px;
+	vertical-align: 5.5px;
 	cursor: pointer;
 	transition: 1s ease;
 }
@@ -332,8 +339,9 @@ textarea.tab-content:focus {
 
 #main-menu { text-align: center; }
 #main-menu button.close-menu { border-radius: 0; }
-#main-menu .new-file-types { display: flex; width: 50%; margin: 20px auto;}
-#main-menu .new-file-types button { width: 25%; margin: 0 1%;}
+#main-menu .new-file-types { display: flex; width: 50%; margin: 20px auto; }
+#main-menu .new-file-types button { width: 25%; margin: 0 1%; }
+#main-menu span { font-family: Arial, Helvetica, sans-serif; }
 
 #main-menu button {
 	border: none;

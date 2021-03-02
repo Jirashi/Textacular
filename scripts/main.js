@@ -3,7 +3,7 @@ function loadConfig() {
         for (let configuration in data) {
             config[configuration] = data[configuration];
         }
-        loadTheme(config["themeLibrary"][config["defaultTheme"]][0]);
+        loadTheme(config["defaultTheme"], config["themeLibrary"][config["defaultTheme"]][0]);
         loadFont(config["fontLibrary"][config["defaultFont"]], 400);
     });
 }
@@ -77,7 +77,7 @@ function initialize() {
             <button onclick="newFile('js'); menuClose();">.js</button>
         </div>
 
-        <span><a href="https://github.com/Jirashi/Textacular">Textacular</a> | Version 3.0 | Jirashi™ 2020</span>
+        <span><a href="https://github.com/Jirashi/Textacular">Textacular</a> | Version 3.1 | Jirashi™ 2020</span>
     </div>
     `
     document.getElementById('menu-content').innerHTML = menuContent;
