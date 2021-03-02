@@ -67,17 +67,32 @@ function initialize() {
     let menuContent = `
     <div id="main-menu">
         <h1>Textacular v3</h1><button class="close-menu">X</button>
-        <button onclick="newFile(config['defaultFileType']); menuClose();">New file</button><br>
-        <button onclick="openFile(); menuClose();">Open file</button><br>
+        <button class="main-menu--btn" onclick="newFile(config['defaultFileType']); menuClose();">New file</button><br>
+        <button class="main-menu--btn" onclick="openFile(); menuClose();">Open file</button><br>
         <hr>
         <div class="new-file-types">
-            <button onclick="newFile('txt'); menuClose();">.txt</button>
-            <button onclick="newFile('html'); menuClose();">.html</button>
-            <button onclick="newFile('css'); menuClose();">.css</button>
-            <button onclick="newFile('js'); menuClose();">.js</button>
+            <button class="main-menu--btn" onclick="newFile('txt'); menuClose();">.txt</button>
+            <button class="main-menu--btn" onclick="newFile('html'); menuClose();">.html</button>
+            <button class="main-menu--btn" onclick="newFile('css'); menuClose();">.css</button>
+            <button class="main-menu--btn" onclick="newFile('js'); menuClose();">.js</button>
         </div>
-
-        <span><a href="https://github.com/Jirashi/Textacular">Textacular</a> | Version 3.1 | Jirashi™ 2020</span>
+        <hr>
+        <h3>Update Log</h3>
+        <div class="update-log">
+            <ul id="menu-list--update-log" class="menu-list--ul">
+                <li class="menu-list--li">
+                    <button class="update-log--btn">Version 3.2 (More Themes, Custom Themes, Added Basic Auto-Completion)</button>
+                </li>
+                <li class="menu-list--li">
+                    <button class="update-log--btn">Version 3.1 (Minor Bug Fixes)</button>
+                </li>
+                <li class="menu-list--li">
+                    <button class="update-log--btn">Version 3.0 (Release)</button>
+                </li>
+            </ul>
+        </div>
+        <hr>
+        <span><a href="https://github.com/Jirashi/Textacular">Textacular</a> | Version 3.2 | Jirashi™ 2020</span>
     </div>
     `
     document.getElementById('menu-content').innerHTML = menuContent;

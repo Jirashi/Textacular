@@ -265,6 +265,7 @@ function Theme() {
         </ul>
     </div>
     <button id="apply-changes--theme" class="apply-changes" onclick="menuClose(this)">Apply Changes</button>
+    <button id="apply-changes--theme-upload" class="apply-changes" onclick="menuClose(this)">Custom Theme</button>
     `
     document.getElementById('menu-content').innerHTML = menuContent;
 

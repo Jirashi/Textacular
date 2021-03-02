@@ -1,11 +1,7 @@
-// IMPORTANT TABLES
-// ===================
 const tabs = {};
 const config = {};
 const editorsOpen = [];
 
-// VARIABLES
-// ===================
 let tabBar = document.getElementById('tabs');
 let currentTab = "";
 let currentMode = "text";
@@ -14,7 +10,6 @@ let editor = document.getElementById('editor');
 let output = document.getElementById('output');
 
 // TAB FUNCTIONS
-// =============
 function addTab(name, type, content) {
     if (9 >= Object.keys(tabs).length) {
         // Generate a unique key for the tab
@@ -68,18 +63,18 @@ function removeTab(key) {
     if (Object.keys(tabs).length === 0) {
         let menuContent = `
         <div id="main-menu">
-            <h1>Textacular v3</h1><button class="close-menu" onclick="menuClose()">X</button>
-            <button onclick="newFile(); menuClose();">New file</button><br>
-            <button onclick="openFile(); menuClose();">Open file</button><br>
+            <h1>Textacular v3</h1><button class="close-menu">X</button>
+            <button class="main-menu--btn" onclick="newFile(config['defaultFileType']); menuClose();">New file</button><br>
+            <button class="main-menu--btn" onclick="openFile(); menuClose();">Open file</button><br>
             <hr>
             <div class="new-file-types">
-                <button onclick="newFile('txt'); menuClose();">.txt</button>
-                <button onclick="newFile('html'); menuClose();">.html</button>
-                <button onclick="newFile('css'); menuClose();">.css</button>
-                <button onclick="newFile('js'); menuClose();">.js</button>
+                <button class="main-menu--btn" onclick="newFile('txt'); menuClose();">.txt</button>
+                <button class="main-menu--btn" onclick="newFile('html'); menuClose();">.html</button>
+                <button class="main-menu--btn" onclick="newFile('css'); menuClose();">.css</button>
+                <button class="main-menu--btn" onclick="newFile('js'); menuClose();">.js</button>
             </div>
-
-            <span><a href="https://github.com/Jirashi/Textacular">Textacular</a> | Version 3.1 | Jirashi™ 2020</span>
+            <hr>
+            <span><a href="https://github.com/Jirashi/Textacular">Textacular</a> | Version 3.2 | Jirashi™ 2020</span>
         </div>
         `
         document.getElementById('menu-content').innerHTML = menuContent;
@@ -145,7 +140,6 @@ function loadTabs() {
 }
 
 // STYLE FUNCTIONS
-// ===============
 function loadTheme(name, colors) {
     // Fetching theme file
     fetch(new Request("./config/theme.json")).then(response => response.json()).then(function(data) {
@@ -178,7 +172,6 @@ function loadFont(fontFamily, fontWeight) {
 }
 
 // MENU FUNCTIONS
-// ==============
 function menuLISelect(li) {
     if (li.classList[0] === "menu-list--li-selected") {
         li.classList = "menu-list--li";
@@ -242,14 +235,31 @@ function menuClose(params) {
             tabs[currentTab][0] = tabs[currentTab][0].replace(`.${tabs[currentTab][2]}`, `.${document.getElementById('file-type--select').value}`);
             tabs[currentTab][2] = document.getElementById('file-type--select').value;
             saveFile();
-            menuClose();
+            
+        } else if (option === "theme-upload") {
+            const regex = /^#([0-9A-F]{3}){1,2}$/i;
+            var themePack = prompt("Upload Custom Theme", "Paste Theme Here...");
+            if (themePack) {
+                themePack = JSON.parse(themePack);
+                for (let theme in themePack) {
+                    let themeName = theme;
+                    let themeColors = themePack[theme][0];
+                    let themeTag = themePack[theme][1];
+                    // Check if colors are valid
+                    for (color in themeColors) {
+                        if (!regex.test(color)) {
+                            themeColors[themeColors.indexOf(color)] = "#000000"
+                        }
+                    }
+                    config["themeLibrary"][themeName] = [themeColors, themeTag];
+                }
+            }
         }
     }
     document.getElementById('menu').style.display = "none";
 }
 
 // OTHER FUNCTIONS
-// ===============
 function footer(textarea) {
     var textLines = textarea.value.substr(0, textarea.selectionStart).split("\n");
     var currentLineNumber = textLines.length;

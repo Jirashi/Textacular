@@ -39,5 +39,7 @@
 
     "::-webkit-scrollbar-track":{"background":0},
     "::-webkit-scrollbar-thumb":{"background":2},
-    "::-webkit-scrollbar-thumb:hover":{"background":3}
+    "::-webkit-scrollbar-thumb:hover":{"background":3},
+    "::-moz-selection": { "background":5, "color": 1 },
+    "::selection": { "background":5, "color": 1 }
 }

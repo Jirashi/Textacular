@@ -1,4 +1,6 @@
-// EVENTS
+let wrappedQuotes = ['"', "'", "`"];
+let wrappedBrackets = {"[":"]", "{":"}", "(":")", "<":">"}
+
 textEditor.addEventListener('keydown', function(e) {
     // Allows tab indentation
     if (e.key == 'Tab') {
@@ -7,10 +9,27 @@ textEditor.addEventListener('keydown', function(e) {
         var end = this.selectionEnd;
 
         this.value = this.value.substring(0, start) +
-        "\t" + this.value.substring(end);
+            "\t" + this.value.substring(start, end)
+            + this.value.substring(end);
 
         this.selectionStart = 
-        this.selectionEnd = start + 1;
+        this.selectionEnd = end + 1;
+    } else if (wrappedQuotes.includes(e.key) || wrappedBrackets[e.key]) {
+        e.preventDefault();
+        var start = this.selectionStart;
+        var end = this.selectionEnd;
+
+        if (wrappedQuotes.includes(e.key)) {
+            this.value = this.value.substring(0, start) +
+            e.key + this.value.substring(start, end) +
+            e.key + this.value.substring(end);
+        } else if (wrappedBrackets[e.key]) {
+            this.value = this.value.substring(0, start) +
+            e.key + this.value.substring(start, end) +
+            wrappedBrackets[e.key] + this.value.substring(end);
+        }
+        this.selectionStart = start + 1;
+        this.selectionEnd = end + 1;
     }
 });
 

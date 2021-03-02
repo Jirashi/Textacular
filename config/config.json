@@ -12,7 +12,12 @@
         "one-light-pro": [["#595852", "#d6d3c2", "#c1beaf", "#d0cdbb", "#464541", "#595852"], "light"],
         "bluloco-light": [["#abacb1", "#fafafa", "#ebebeb", "#c9cbce", "#40424b", "#275fe4"], "light"],
         "night-owl": [["#465e73", "#001122", "#000c18", "#010d17", "#d0dee3", "#0b2942"], "dark"],
-        "dracula": [["#44475a", "#282a36", "#22222c", "#191923", "#f8f8f2", "#6272a4"], "dark"]
+        "dracula": [["#44475a", "#282a36", "#22222c", "#191923", "#f8f8f2", "#6272a4"], "dark"],
+        "monokai-classic":[["#75715e", "#272822", "#252620", "#23241f", "#f8f8f2", "#fd971f"], "dark"],
+        "gruvbox-dark":[["#a89984", "#1d2021", "#282828", "#3c3836", "#ebdbb2", "#b8bb26"], "dark"],
+        "gruvbox-light":[["#a89984", "#f9f5d7", "#fbf1c7", "#ebdbb2", "#3c3836", "#af3a03"], "light"],
+        "nord-dark": [["#4C566A", "#2E3440", "#434C5E", "#3B4252", "#ECEFF4", "#5E81AC"], "dark"],
+        "nord-light": [["#88C0D0", "#ECEFF4", "#E5E9F0", "#D8DEE9", "#2E3440", "#3B4252"], "light"]
     },
     "fontLibrary":{
         "Arial":"Arial, Helvetica, sans-serif",
